@@ -14,3 +14,5 @@ console.log(acronyms);
 const obj = names.map((name, index) => ({x: name, y: acronyms[index]}));
 obj.sort((a, b) => a.y.localeCompare(b.y));
 obj.forEach(a => console.log(`Name: ${a.x}, acronym: ${a.y}`));
+
+// si poteva fare senza functional programming
