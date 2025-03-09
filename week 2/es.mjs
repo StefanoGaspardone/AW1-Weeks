@@ -1,5 +1,3 @@
-'use strict';
-
 import dayjs from "dayjs";
 
 function Answer(text, username, score, date) {
