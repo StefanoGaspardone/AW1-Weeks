@@ -1,6 +1,6 @@
 # Exercise 1: Better Scores
 
-_Goal: basic handling of JavaScript arrays_
+_Goal: basic handling of JavaScript arrays._
 
 Develop a small JavaScript program to manage the scores given to your user in a question-and-answer website (e.g., StackOverflow). Scores are integer numbers, and they may be negative. You should:
 
@@ -15,7 +15,7 @@ Develop a small JavaScript program to manage the scores given to your user in a 
 
 # Exercise 2: My Users' List
 
-_Goal: basic handling of JavaScript strings_
+_Goal: basic handling of JavaScript strings._
 
 Develop a small JS program to manage the list of users in a Q&A website.
 

@@ -1,6 +1,6 @@
 # Exercise 4: Q&A, with a database
 
-_Goal: interacting with a database while experimenting with async code_.
+_Goal: interacting with a database while experimenting with async code._
 
 Update the previous "Q&A" exercise to use a database.
 

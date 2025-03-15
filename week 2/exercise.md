@@ -1,6 +1,6 @@
 # Exercise 3: Q&A
 
-_Goal: managing a simple data structure as an array of objects_.
+_Goal: managing a simple data structure as an array of objects._
 
 Using JavaScript objects and functional programming methods, manage objects that contain information about a question and their answers.
 
