@@ -46,12 +46,16 @@ function App() {
     });
   }
 
+  const deleteAnswer = (id) => {
+    setAnswers(oldAnswers => oldAnswers.filter(ans => ans.id !== id));
+  }
+
   return (
     <>
       <NavHeader questionNum={question.id} />
       <Container fluid className='mt-3'>
         <QuestionDescription question={question} />
-        <Answers answers={answers} voteUp={voteUp} addAnswer={addAnswer} updateAnswer={updateAnswer}></Answers>
+        <Answers answers={answers} voteUp={voteUp} addAnswer={addAnswer} updateAnswer={updateAnswer} deleteAnswer = {deleteAnswer}></Answers>
       </Container>
     </>
   )

@@ -19,7 +19,7 @@ function Answers(props) {
     </Row>
     <Row>
       <Col lg={10} className="mx-auto">
-        <AnswerTable answers={props.answers} voteUp={props.voteUp} handleEdit={handleEdit}></AnswerTable>
+        <AnswerTable answers={props.answers} voteUp={props.voteUp} handleEdit={handleEdit} deleteAnswer = {props.deleteAnswer}></AnswerTable>
         
         {mode === 'view' && <Button variant='primary' onClick={() => {setMode('add');}}>Add</Button>}
         
@@ -58,7 +58,7 @@ function AnswerTable (props) {
         </tr>
       </thead>
       <tbody>
-        { sortedAnswers.map((ans) => <AnswerRow answer={ans} key={ans.id} voteUp={props.voteUp} handleEdit={props.handleEdit}/>) }
+        { sortedAnswers.map((ans) => <AnswerRow answer={ans} key={ans.id} voteUp={props.voteUp} handleEdit={props.handleEdit} deleteAnswer = {props.deleteAnswer}/>) }
       </tbody>
     </Table>
   );
@@ -66,7 +66,7 @@ function AnswerTable (props) {
 
 function AnswerRow(props) {
   return(
-    <tr><AnswerData answer={props.answer}/><AnswerAction answer={props.answer} voteUp={props.voteUp} handleEdit={props.handleEdit}/></tr>
+    <tr><AnswerData answer={props.answer}/><AnswerAction answer={props.answer} voteUp={props.voteUp} handleEdit={props.handleEdit} deleteAnswer = {props.deleteAnswer}/></tr>
   );
 }
 
@@ -90,7 +90,7 @@ function AnswerAction(props) {
       <Button variant='primary' className='mx-1' onClick={
         () =>props.handleEdit(props.answer)
       }><i className='bi bi-pencil-square'></i></Button> 
-      <Button variant='danger'><i className='bi bi-trash'></i></Button>
+      <Button onClick = {() => props.deleteAnswer(props.answer.id)} variant='danger'><i className='bi bi-trash'></i></Button>
     </td>
   );
 }
