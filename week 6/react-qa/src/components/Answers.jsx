@@ -1,16 +1,15 @@
-/* eslint-disable react/prop-types */
-import 'bootstrap-icons/font/bootstrap-icons.css';
+import "bootstrap-icons/font/bootstrap-icons.css";
 import { Row, Col, Table, Button } from "react-bootstrap";
 
 function Answers (props) {
   return(
     <>
     <Row>
-      <Col as='h2'>Answers:</Col>
+      <Col as="h2">Answers:</Col>
     </Row>
     <Row>
       <Col lg={10} className="mx-auto">
-        <AnswerTable answers={props.answers}></AnswerTable>
+        <AnswerTable answers={props.answers} setAnswers={props.setAnswers} />
       </Col>
     </Row>
     </>
@@ -30,7 +29,7 @@ function AnswerTable (props) {
         </tr>
       </thead>
       <tbody>
-        { props.answers.map((ans) => <AnswerRow answer={ans} key={ans.id}/>) }
+        { props.answers.map((ans) => <AnswerRow key={ans.id} answer={ans} setAnswers={props.setAnswers} />) }
       </tbody>
     </Table>
   );
@@ -38,14 +37,14 @@ function AnswerTable (props) {
 
 function AnswerRow(props) {
   return(
-    <tr><AnswerData answer={props.answer}/><AnswerAction /></tr>
+    <tr><AnswerData answer={props.answer} /><AnswerAction setAnswers={props.setAnswers} /></tr>
   );
 }
 
 function AnswerData(props) {
   return(
     <>
-      <td>{props.answer.date.format('YYYY-MM-DD')}</td>
+      <td>{props.answer.date.format("YYYY-MM-DD")}</td>
       <td>{props.answer.text}</td>
       <td>{props.answer.email}</td>
       <td>{props.answer.score}</td>
@@ -56,9 +55,9 @@ function AnswerData(props) {
 function AnswerAction() {
   return(
     <td>
-      <Button variant='warning'><i className='bi bi-arrow-up'></i></Button>
-      <Button variant='primary' className='mx-1'><i className='bi bi-pencil-square'></i></Button> 
-      <Button variant='danger'><i className='bi bi-trash'></i></Button>
+      <Button variant="warning"><i className="bi bi-arrow-up" /></Button>
+      <Button variant="primary" className="mx-1"><i className="bi bi-pencil-square" /></Button> 
+      <Button variant="danger"><i className="bi bi-trash" /></Button>
     </td>
   );
 }

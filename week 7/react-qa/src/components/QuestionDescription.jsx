@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { Col, Row } from 'react-bootstrap';
 
 function QuestionDescription (props) {

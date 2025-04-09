@@ -1,11 +1,10 @@
-# Componenti principali e loro props
-
-* Navbar -> num. domanda
-* Descrizione domanda -> num. domanda, domanda, mail autore
-* Risposte -> lista risposte
-  * "Answers" (titolo)
-  * Tabella
-    * Riga
-      * Dati
-      * Azioni
-* Footer
+- Navbar
+- Question
+    - Text
+    - Author
+- Risposte
+    - Tabella
+        - Answer
+            - Info
+            - Actions
+- Footer

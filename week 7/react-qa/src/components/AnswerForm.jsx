@@ -1,46 +1,59 @@
-import { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
-import dayjs from 'dayjs';
+import { useActionState } from "react";
+import { Form, Button, Alert } from "react-bootstrap";
+import dayjs from "dayjs";
 
 function AnswerForm(props) {
-  const [text, setText] = useState(props.answer ? props.answer.text : '');
-  const [email, setEmail] = useState(props.answer ? props.answer.email : '');
-  const [date, setDate] = useState(props.answer ? props.answer.date.format('YYYY-MM-DD') : dayjs().format('YYYY-MM-DD'));
+  
+  const initialState = {
+    text: props.answer?.text,
+    email: props.answer?.email,
+    date: props.answer?.date ?? dayjs()
+  };
+  
+  const handleSubmit = async (prevState, formData) => {
+    // creo un oggetto {} dal FormData
+    const answer = Object.fromEntries(formData.entries());
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // creare un nuova risposta
-    const answer = {text, email, date};
-
-    // TODO: aggiungere validazione
-
-    if(props.mode === 'edit') {
-      // aggiornare la risposta in questione
-      props.updateAnswer({id: props.answer.id, ...answer});
-    } else {
-      // aggiungere la risposta allo stato
-      props.addAnswer(answer);
+    // esempio di validazione
+    if(answer.text.trim() === "") {
+      answer.error = "The answer can't be empty, please fix it!";
+      return answer;
     }
+    
+    if(props.addAnswer)
+      // aggiungo la risposta allo stato in App
+      props.addAnswer(answer);
+    else
+      props.editAnswer({id: props.answer.id, ...answer});
+
+    // ritorno lo stato del form
+    return initialState;
   }
 
+  const [state, formAction] = useActionState(handleSubmit, initialState);
+
   return(
-    <Form onSubmit={handleSubmit}>
-      <Form.Group className='mb-3'>
-        <Form.Label>Text</Form.Label>
-        <Form.Control type="text" required={true} minLength={2} value={text} onChange={(event) => setText(event.target.value)}></Form.Control>
-      </Form.Group>
-      <Form.Group className='mb-3'>
-        <Form.Label>email</Form.Label>
-        <Form.Control type="email" required={true} value={email} onChange={(event) => setEmail(event.target.value)}></Form.Control>
-      </Form.Group>
-      <Form.Group className='mb-3'>
-        <Form.Label>Date</Form.Label>
-        <Form.Control type="date" value={date} onChange={(event) => setDate(event.target.value)}></Form.Control>
-      </Form.Group>
-      {props.mode==='add' && <Button variant='success' type='submit'>Add</Button>}
-      {props.mode==='edit' && <Button variant='success' type='submit'>Update</Button>}{' '}
-      <Button variant='danger' onClick={props.cancel}>Cancel</Button>
-    </Form>
+    <>
+      { state.error && <Alert variant="secondary">{state.error}</Alert> }
+      <Form action={formAction}>
+        <Form.Group className="mb-3">
+          <Form.Label>Text</Form.Label>
+          <Form.Control name="text" type="text" required={true} minLength={2} defaultValue={state.text}></Form.Control>
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>email</Form.Label>
+          <Form.Control name="email" type="email" required={true} defaultValue={state.email}></Form.Control>
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Date</Form.Label>
+          <Form.Control name="date" type="date" required={true} min={dayjs().format("YYYY-MM-DD")} defaultValue={state.date.format("YYYY-MM-DD")}></Form.Control>
+        </Form.Group>
+        { props.addAnswer && <Button variant="primary" type="submit">Add</Button> }
+        { props.editAnswer && <Button variant="success" type="submit">Update</Button> }
+        {" "}
+        <Button variant="danger" onClick={props.cancel}>Cancel</Button>
+      </Form>
+    </>
   );
 }
 

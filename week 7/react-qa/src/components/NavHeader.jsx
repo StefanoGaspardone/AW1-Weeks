@@ -1,5 +1,4 @@
 import { Container, Navbar } from 'react-bootstrap';
-import PropTypes from 'prop-types';
 
 function NavHeader (props) {
   return(
@@ -10,9 +9,5 @@ function NavHeader (props) {
     </Navbar>
   );
 }
-
-NavHeader.propTypes = {
-  questionNum: PropTypes.number
-};
 
 export default NavHeader;
