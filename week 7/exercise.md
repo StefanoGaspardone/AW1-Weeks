@@ -10,9 +10,9 @@ Use the defined state and decide where to put the function to increase the score
 
 ## Add a new answer
 
-Include a form on the question page to add a new answer. The form will appear under the answers' table; choose whether to use _controlled input components_ or _useActionState_. 
+Include a form on the question page to add a new answer. The form will appear under the answers' table; choose whether to use _controlled input components_ or _useActionState_.
 
-First, start defining the suitable components to show the form *without* handling the insertion of a new answer in the table. Then, *handle the insertion* of a new answer in the table. Use the defined state to perform this operation.
+First, start defining the suitable components to show the form _without_ handling the insertion of a new answer in the table. Then, _handle the insertion_ of a new answer in the table. Use the defined state to perform this operation.
 
 ## To use state or not to use state
 
@@ -29,4 +29,3 @@ What happens when you edit two answers, one after the other, without submitting 
 ## Delete an answer (optional)
 
 By clicking on the "delete" button associated with an answer, the answer should be deleted from the table (and the state).
-

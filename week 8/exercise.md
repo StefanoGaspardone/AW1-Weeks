@@ -13,9 +13,9 @@ Create four distinct pages with their corresponding routes:
   3. **Add/edit an answer**, i.e., the form already in the app. _After successfully submitting the form, redirect the user to the page described in point 2_.
   4. Properly **handle wrong URLs** by providing a _404 Not Found page_.
 
-### Hints
+## Hints
 
-Start by splitting the current application content (points 2 and 3 above) into separate pages/routes. 
+Start by splitting the current application content (points 2 and 3 above) into separate pages/routes.
 First, decide on the route structure and naming. Then, restructure the application for implementing those routes, making sure to pass the necessary information between them (e.g., the answer id or the answer to edit). Make sure not to break any existing functionalities.
 
 Finally, implement the _index_ page (point 1) and the _Not Found_ page (point 4).
