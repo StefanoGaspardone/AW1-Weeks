@@ -6,4 +6,4 @@ Starting from the React application developed in the last weeks and the API Serv
 
 In particular, replace the "fake" questions and answers with the information obtained through the server. To do so, set up CORS appropriately in Express, call the appropriate APIs from React (see the empty `API.mjs` file in `react-qa`), and set up `useEffect()` as needed.
 
-For this week, we want to call the APIs to _get_ the list of questions and the associated answers for each of them. Ignore the creation, editing, or deletion of questions and answers.
+For this week, we want to call the APIs to *get* the list of questions and the associated answers for each of them. Ignore the creation, editing, or deletion of questions and answers.

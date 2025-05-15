@@ -2,10 +2,8 @@
   "name": "qa-server",
   "version": "1.0.0",
   "description": "The `qa-server` is the server-side app companion for HeapOverrun. It presents some APIs to perform some CRUD operations on questions and their answers.",
-  "main": "index.mjs",
-  "type": "module",
+  "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Luigi De Russis",
