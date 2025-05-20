@@ -10,23 +10,31 @@ function Answers () {
 
   const { questionId } = useParams();
 
+  const getAnswers = async () => {
+    const answers = await API.getAnswers(questionId);
+    setAnswers(answers);
+  }
+
   useEffect(() => {
-    const getAnswers = async () => {
-      const answers = await API.getAnswers(questionId);
-      setAnswers(answers);
-    }
     getAnswers();
   }, []);
 
   const voteUp = (answerId) => {
     setAnswers(oldAnswers => {
       return oldAnswers.map(ans => {
-        if(ans.id === answerId)
-          return new Answer(ans.id, ans.text, ans.email, ans.userId, ans.date, ans.score +1);
+        if(ans.id === answerId) {
+          const answer = new Answer(ans.id, ans.text, ans.email, ans.userId, ans.date, ans.score +1);
+          answer.voted = true;
+          return answer;
+        }
         else
           return ans;
       });
     });
+
+    API.voteUp(answerId)
+      .then(() => getAnswers())
+      .catch(err => console.log(err));
   }
 
   const deleteAnswer = (answerId) => {
@@ -101,9 +109,9 @@ function AnswerData(props) {
 function AnswerAction(props) {
   return(
     <td>
-      <Button variant="warning" onClick={() => props.voteUp(props.answer.id)}><i className="bi bi-arrow-up" /></Button>
-      <Link className="btn btn-primary mx-1" to={`answers/${props.answer.id}/edit`}><i className="bi bi-pencil-square" /></Link>
-      {/* con location.state: <Link className="btn btn-primary mx-1" to={`answers/${props.answer.id}/edit`} state={props.answer.serialize()} ><i className="bi bi-pencil-square" /></Link> */}
+      <Button variant="warning" onClick={() => props.voteUp(props.answer.id)} disabled={props.answer.voted}><i className="bi bi-arrow-up" /></Button>
+      {/* senza params: <Link className="btn btn-primary mx-1" to={`answers/${props.answer.id}/edit`}><i className="bi bi-pencil-square" /></Link> */}
+      <Link className="btn btn-primary mx-1" to={`answers/${props.answer.id}/edit`} state={props.answer.serialize()} ><i className="bi bi-pencil-square" /></Link> 
       <Button variant="danger" onClick={() => props.deleteAnswer(props.answer.id)}><i className="bi bi-trash" /></Button>
     </td>
   );

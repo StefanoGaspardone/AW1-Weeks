@@ -22,26 +22,6 @@ function App() {
     getQuestions();
   }, []);
 
-  const addAnswer = (answer) => {
-    setAnswers(oldAnswers => {
-      // temporaneo
-      const newId = Math.max(... oldAnswers.map(ans => ans.id)) + 1;
-      const newAnswer = new Answer(newId, answer.text, answer.email, undefined, answer.date);
-      return [...oldAnswers, newAnswer];
-    });
-  }
-
-  const updateAnswer = (answer) => {
-    setAnswers(oldAnswers => {
-      return oldAnswers.map(ans => {
-        if(ans.id === answer.id)
-          return new Answer(answer.id, answer.text, answer.email, ans.userId, answer.date, ans.score);
-        else
-          return ans;
-      });
-    });
-  }
-
 
   {/* ROUTES
     
@@ -65,10 +45,8 @@ function App() {
         <Route path="/" element={ <Questions questions={questions}/> } />
         <Route path="/questions/:questionId" element={ <QuestionDescription questions={questions} /> } >
           <Route index element={ <Answers /> } />
-          <Route path="answers/new" element={ <AnswerForm addAnswer={addAnswer} /> } />
-          <Route path="answers/:answerId/edit" element={ <EditAnswerForm editAnswer={updateAnswer} /> } />
-          {/* con location.state
-          <Route path="answers/:answerId/edit" element={ <EditAnswerForm editAnswer={updateAnswer} /> } /> */}
+          <Route path="answers/new" element={ <AnswerForm addAnswer={true} /> } />
+          <Route path="answers/:answerId/edit" element={ <EditAnswerForm editAnswer={true} /> } /> 
         </Route>
         <Route path="*" element={ <NotFound /> } />
       </Route>

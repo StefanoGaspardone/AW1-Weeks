@@ -113,8 +113,9 @@ app.post('/api/answers/:id/vote', [
   const answerId = req.params.id;
   try {
     const num = await voteAnswer(answerId, req.body.vote);
-    if(num === 1)
-      res.status(204).end();
+    if(num === 1) {
+      setTimeout(() => res.status(204).end(), 3000);
+    }
     else
       throw new Error(`Error in casting a vote for answer #${answerId}`);
   } catch(e) {
